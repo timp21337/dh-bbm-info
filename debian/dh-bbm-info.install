@@ -1,0 +1,2 @@
+bbm_info.pm /usr/share/perl5/Debian/Debhelper/Sequence
+dh_bbm_info /usr/bin

@@ -1,0 +1,12 @@
+Source: dh-bbm-info
+Section: utils
+Priority: extra
+Maintainer: Tristan Colgate-McFarlane
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.8.3
+
+Package: dh-bbm-info
+Architecture: all
+Depends: debhelper (>= 7)
+Description: Helper for adding blinkbox build info to packages
+  Internal debhelp extension to add build info to packages

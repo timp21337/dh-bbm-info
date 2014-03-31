@@ -1,0 +1,66 @@
+#!/usr/bin/perl
+
+=head1 NAME
+
+dh_bbm_info - Append BlinkBox build info to control
+
+=cut
+
+use warnings;
+use strict;
+use Debian::Debhelper::Dh_Lib;
+use File::Find;
+use File::stat;
+
+=head1 SYNOPSIS
+
+B<dh_vvm_info> [S<I<debhelper options>>] 
+
+=head1 DESCRIPTION
+
+=head1 NOTES
+
+Note that this command is not idempotent. L<dh_prep(1)> should be called
+between invocations of this command. Otherwise, it may cause multiple
+instances of the same text to be added to maintainer scripts.
+
+=cut
+
+init();
+
+my %transform = (
+  'GIT_COMMIT' => 'Bbm-Git-Commit',
+  'GIT_BRANCH' => 'Bbm-Git-Branch',
+  'GIT_URL'    => 'Bbm-Git-Url',
+  'JOB_NAME'   => 'Bbm-Jenkins-Job-Name',
+  'NODE_NAME'  => 'Bbm-Jenkins-Node-Name',
+  'BUILD_URL'  => 'Bbm-Jenkins-Build-Url'
+);
+
+foreach my $package (@{$dh{DOPACKAGES}}) {
+	my $tmp = tmpdir($package);
+  my $controlfile = "${tmp}/DEBIAN/control";
+
+  if (-f $controlfile) {
+    my $envvar;
+    foreach $envvar (keys %transform){
+      if($ENV{$envvar}){
+        complex_doit("echo " . $transform{$envvar} . ": " . $ENV{$envvar} . " >> $controlfile");
+      };
+    };
+  } else {
+    error("missing control file, $controlfile, aborting");
+  }
+}
+
+=head1 SEE ALSO
+
+L<debhelper(7)>
+
+This program is a part of debhelper.
+
+=head1 AUTHOR
+
+Andrew Stribblehill <ads@debian.org>
+
+=cut
