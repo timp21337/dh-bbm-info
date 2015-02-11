@@ -29,12 +29,13 @@ instances of the same text to be added to maintainer scripts.
 init();
 
 my %transform = (
-  'GIT_COMMIT' => 'Bbm-Git-Commit',
-  'GIT_BRANCH' => 'Bbm-Git-Branch',
-  'GIT_URL'    => 'Bbm-Git-Url',
-  'JOB_NAME'   => 'Bbm-Jenkins-Job-Name',
-  'NODE_NAME'  => 'Bbm-Jenkins-Node-Name',
-  'BUILD_URL'  => 'Bbm-Jenkins-Build-Url'
+  'GIT_COMMIT'   => 'Bbm-Git-Commit',
+  'GIT_BRANCH'   => 'Bbm-Git-Branch',
+  'GIT_URL'      => 'Bbm-Git-Url',
+  'JOB_NAME'     => 'Bbm-Jenkins-Job-Name',
+  'NODE_NAME'    => 'Bbm-Jenkins-Node-Name',
+  'BUILD_NUMBER' => 'Bbm-Jenkins-Build-Number',
+  'BUILD_URL'    => 'Bbm-Jenkins-Build-Url'
 );
 
 foreach my $package (@{$dh{DOPACKAGES}}) {
